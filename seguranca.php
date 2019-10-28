@@ -41,7 +41,7 @@ require_once 'config/config.php';
 						<a href="?pag=cadastrar.php">Cadastrar</a>
 					</li>
 					<li>
-						<a href="?pag=sobre.php">Sobre</a>
+						<a href="?pag=formularioImg.php">Upload de Imagem</a>
 					</li>
 				</ul>
             </div>
