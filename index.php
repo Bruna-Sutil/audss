@@ -34,26 +34,23 @@ include_once('config/config.php');
 				<input type="submit" name="entrar" class="form-control btn btn-success" value="Acessar">
 			</div>
 			<?php
+			$curl = curl_init();
+
+			curl_setopt_array($curl, [
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_POST => true,
+				CURLOPT_URL => 'https://www.google.com/recaptcha/api/siteverify',
+				CURLOPT_POSTFIELDS => [
+					'secret' => '6LdZ8r8UAAAAAMej5oE8HODNQu8uU573u8I1DI9E',
+					'response' => $_POST['g-recaptcha'],
+					'remoteip' => $_SERVER['REMOTE_ADDR']
+				]
+			]);
+
+			$reponse = json_decode(curl_exec($curl));
+
+			curl_close($curl);
 			if( isset($_REQUEST['entrar']) ){
-
-
-				$curl = curl_init();
-
-				curl_setopt_array($curl, [
-					CURLOPT_RETURNTRANSFER => true,
-					CURLOPT_POST => true,
-					CURLOPT_URL => 'https://www.google.com/recaptcha/api/siteverify',
-					CURLOPT_POSTFIELDS => [
-						'secret' => '6LdZ8r8UAAAAAMej5oE8HODNQu8uU573u8I1DI9E',
-						'response' => $_POST['g-recaptcha'],
-						'remoteip' => $_SERVER['REMOTE_ADDR']
-					]
-				]);
-
-				$reponse = json_decode(curl_exec($curl));
-
-				curl_close($curl);
-
 				if( $reponse.success == true ) {
 					$email = addslashes($_REQUEST['email']);
 					$senha = addslashes($_REQUEST['senha']);
