@@ -35,20 +35,43 @@ include_once('config/config.php');
 			</div>
 			<?php
 			if( isset($_REQUEST['entrar']) ){
-				$email = addslashes($_REQUEST['email']);
-				$senha = addslashes($_REQUEST['senha']);
-				$verifica = mysqli_query($conn, " SELECT * FROM usuarios WHERE email = '{$email}' AND senha = '{$senha}' ")or die(mysql_error());
 
-				if( mysqli_num_rows($verifica) > 0 ){
-					$_SESSION['login'] = $_REQUEST['email'];
-					header("Location: ?pag=seguranca.php");
-				}
-				else{
-					echo '
-			              <div class="alert alert-error">
-			                Falha ao logar.
-			              </div>
-			            ';
+
+				$curl = curl_init();
+
+				curl_setopt_array($curl, [
+					CURLOPT_RETURNTRANSFER => true,
+					CURLOPT_POST => true,
+					CURLOPT_URL => 'https://www.google.com/recaptcha/api/siteverify',
+					CURLOPT_POSTFIELDS => [
+						'secret' => '6LdZ8r8UAAAAAMej5oE8HODNQu8uU573u8I1DI9E',
+						'response' => $_POST['g-recaptcha'],
+						'remoteip' => $_SERVER['REMOTE_ADDR']
+					]
+				]);
+
+				$reponse = json_decode(curl_exec($curl));
+
+				curl_close($curl);
+
+				if( $reponse.success == true ) {
+					$email = addslashes($_REQUEST['email']);
+					$senha = addslashes($_REQUEST['senha']);
+					$verifica = mysqli_query($conn, " SELECT * FROM usuarios WHERE email = '{$email}' AND senha = '{$senha}' ")or die(mysql_error());
+
+					if( mysqli_num_rows($verifica) > 0 ){
+						$_SESSION['login'] = $_REQUEST['email'];
+						header("Location: ?pag=seguranca.php");
+					}
+					else{
+						echo '
+								<div class="alert alert-error">
+								Falha ao logar.
+								</div>
+							';
+					}
+				} else {
+					echo 'acesso negado!';
 				}
 			}
 			?>
