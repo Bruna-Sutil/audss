@@ -11,7 +11,7 @@ require_once 'config/config.php';
 ?>
 <html>
 <head>
-	<title>Um projeto vuneravel</title>
+	<title>T</title>
 	<!--boostrap-->
 	<link href="style/bootstrap.css" rel="stylesheet">
 	<link href="style/bootstrap.min.css" rel="stylesheet">
@@ -27,9 +27,6 @@ require_once 'config/config.php';
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="?pag=home.php">
-              	<img src="img/logo.png" alt="EspecializaTi" class='img-logo'>
-              </a>
             </div>
         
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -42,6 +39,7 @@ require_once 'config/config.php';
 					</li>
 					<li>
 						<a href="?pag=formularioImg.php">Upload de Imagem</a>
+						<!-- <?php session_destroy(); ?> -->
 					</li>
 				</ul>
             </div>
@@ -62,7 +60,7 @@ require_once 'config/config.php';
 		?>
 	</div>
 	<footer>
-		<p>Portal EspecializaTi - especializati.com.br</p>
+		<p>Trabalho de Auditoria e Segurança de Sistemas</p>
 	</footer>
 </body>
 </html>
