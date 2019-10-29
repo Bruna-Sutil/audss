@@ -11,10 +11,11 @@ include_once('config/config.php');
 <head>
 	<title>Login</title>
 
-	<!--boostrap-->
 	<link href="style/bootstrap.css" rel="stylesheet">
 	<link href="style/bootstrap.min.css" rel="stylesheet">
 	<link href="style/style.css" rel="stylesheet">
+
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 	<div class="container">
@@ -25,6 +26,9 @@ include_once('config/config.php');
 			</div>
 			<div class="form-group">
 				<input type="password" name="senha" class="form-control" placeholder="Sua senha">
+			</div>
+			<div class="form-group">
+				<div class="g-recaptcha" data-sitekey="6LdZ8r8UAAAAALw6bCjctJA7CAHxz6q7C3AaFrpz"></div>
 			</div>
 			<div class="form-group">
 				<input type="submit" name="entrar" class="form-control btn btn-success" value="Acessar">
